@@ -615,6 +615,12 @@
                     </div>
 
                     <div class="form-group">
+                        <label class="form-label">Problem Statement</label>
+                        <textarea id="questionProblemStatement" class="form-textarea" rows="3"
+                            placeholder="Enter the full problem statement here..."></textarea>
+                    </div>
+
+                    <div class="form-group">
                         <label class="form-label">Procedure / Approach</label>
                         <textarea id="questionProcedure" class="form-textarea" rows="3"
                             placeholder="Explain the approach..."></textarea>
@@ -944,6 +950,7 @@
             document.getElementById('questionDifficulty').value = q.difficulty;
             document.getElementById('questionUrl').value = q.leetcode_url;
             document.getElementById('questionProcedure').value = q.procedure || '';
+            document.getElementById('questionProblemStatement').value = q.problem_statement || '';
             document.getElementById('solutionPython').value = q.solution_python || '';
             document.getElementById('solutionJava').value = q.solution_java || '';
             document.getElementById('solutionCpp').value = q.solution_cpp || '';
@@ -963,6 +970,7 @@
             document.getElementById('questionTitle').value = '';
             document.getElementById('questionUrl').value = '';
             document.getElementById('questionProcedure').value = '';
+            document.getElementById('questionProblemStatement').value = '';
             document.getElementById('solutionPython').value = '';
             document.getElementById('solutionJava').value = '';
             document.getElementById('solutionCpp').value = '';
@@ -979,6 +987,7 @@
             const title = document.getElementById('questionTitle').value.trim();
             const difficulty = document.getElementById('questionDifficulty').value;
             const url = document.getElementById('questionUrl').value.trim();
+            const problemStatement = document.getElementById('questionProblemStatement').value.trim();
             const procedure = document.getElementById('questionProcedure').value.trim();
             const solution_python = document.getElementById('solutionPython').value.trim();
             const solution_java = document.getElementById('solutionJava').value.trim();
@@ -995,6 +1004,7 @@
                 title,
                 difficulty,
                 leetcodeUrl: url,
+                problemStatement,
                 procedure,
                 solution_python,
                 solution_java,

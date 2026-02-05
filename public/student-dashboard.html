@@ -90,6 +90,38 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            width: 100%;
+            justify-content: space-between;
+        }
+
+        .streak-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #ff9800;
+            /* Fire color */
+            font-weight: 700;
+            background: rgba(255, 152, 0, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-full);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(255, 152, 0, 0.4);
+            }
+
+            70% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 10px rgba(255, 152, 0, 0);
+            }
+
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(255, 152, 0, 0);
+            }
         }
 
         .progress-header i {
@@ -545,7 +577,17 @@
             overflow-y: auto;
             position: relative;
             animation: modalIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            padding: 3rem;
+            padding: 3.5rem;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .modal-content.full-screen {
+            max-width: 100vw;
+            max-height: 100vh;
+            width: 100vw;
+            height: 100vh;
+            border-radius: 0;
+            padding: 4rem;
         }
 
         @keyframes modalIn {
@@ -560,28 +602,178 @@
             }
         }
 
-        .modal-close {
+        .modal-controls {
             position: absolute;
             top: 1.5rem;
             right: 1.5rem;
+            display: flex;
+            gap: 1rem;
+            z-index: 10;
+        }
+
+        .modal-control-btn {
             background: var(--surface-hover);
-            border: none;
+            border: 1px solid var(--border);
             color: var(--text-primary);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 1.1rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .modal-control-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .modal-control-btn.close-btn:hover {
+            background: var(--error);
+            border-color: var(--error);
+        }
+
+        /* Structured Approach Styles */
+        .approach-section {
+            margin-bottom: 2.5rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .approach-section:last-child {
+            border-bottom: none;
+        }
+
+        .approach-title {
             font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .approach-title i {
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+
+        .example-box {
+            background: rgba(15, 15, 20, 0.6);
+            border: 1px dashed var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            font-family: 'Fira Code', monospace;
+            margin: 1rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .example-box::before {
+            content: 'EXAMPLE';
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: var(--primary);
+            color: white;
+            padding: 4px 12px;
+            font-size: 0.7rem;
+            font-weight: 900;
+            letter-spacing: 1px;
+            border-bottom-left-radius: 12px;
+        }
+
+        .procedure-list {
+            list-style: none;
+            counter-reset: steps;
+            padding: 0;
+        }
+
+        .procedure-step {
+            display: flex;
+            gap: 1.25rem;
+            margin-bottom: 1.2rem;
+            align-items: flex-start;
+        }
+
+        .procedure-step::before {
+            counter-increment: steps;
+            content: counter(steps);
+            flex-shrink: 0;
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 10px rgba(139, 92, 246, 0.3);
+        }
+
+        .procedure-text {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            padding-top: 4px;
+        }
+
+        .complexity-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .complexity-card {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
             transition: all 0.3s ease;
         }
 
-        .modal-close:hover {
-            background: var(--error);
-            color: white;
-            transform: rotate(90deg);
+        .complexity-card:hover {
+            border-color: var(--primary);
+            background: var(--surface-hover);
+        }
+
+        .complexity-card i {
+            font-size: 1.5rem;
+            color: var(--primary);
+            background: rgba(139, 92, 246, 0.1);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+        }
+
+        .complexity-info span {
+            display: block;
+        }
+
+        .complexity-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .complexity-val {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--text-primary);
         }
 
         .solve-action-btn {
@@ -600,7 +792,7 @@
             align-items: center;
             justify-content: center;
             gap: 0.75rem;
-            box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
+            box-shadow: 0 10px 20px rgba(22, 163, 74, 0.2);
         }
 
         .solve-action-btn:hover:not(:disabled) {
@@ -778,8 +970,14 @@
 
             <div class="progress-card">
                 <div class="progress-header">
-                    <i class="fas fa-chart-line"></i>
-                    Progress Overview
+                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fas fa-chart-line"></i>
+                        Progress Overview
+                    </div>
+                    <div class="streak-container" title="Current Day Streak">
+                        <i class="fas fa-fire"></i>
+                        <span id="streakCount">0</span>
+                    </div>
                 </div>
 
                 <div class="stat-item">
@@ -854,51 +1052,127 @@
 
     <!-- Question Modal -->
     <div id="questionModal" class="modal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModal()">
-                <i class="fas fa-times"></i>
-            </button>
+        <div id="modalContainer" class="modal-content">
+            <div class="modal-controls">
+                <button class="modal-control-btn" onclick="toggleFullScreen()" title="Full Screen">
+                    <i id="fullScreenIcon" class="fas fa-expand"></i>
+                </button>
+                <button class="modal-control-btn close-btn" onclick="closeModal()" title="Close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
             <div id="modalHeader">
                 <span id="modalDifficulty" class="difficulty-badge">Easy</span>
                 <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 1rem;">
-                    <h2 id="modalTitle" style="font-size: 2rem; margin: 0;">Question Title</h2>
-                    <a id="modalLeetCodeIcon" href="#" target="_blank" style="color: #ffa116; font-size: 1.5rem;"
-                        title="Solve on LeetCode">
+                    <h2 id="modalTitle" style="font-size: 2.5rem; margin: 0; font-weight: 900; letter-spacing: -1px;">
+                        Question Title</h2>
+                    <a id="modalLeetCodeIcon" href="#" target="_blank"
+                        style="color: #ffa116; font-size: 1.8rem; margin-right: 3rem;" title="Solve on LeetCode">
                         <i class="fas fa-external-link-alt"></i>
                     </a>
                 </div>
-                <div id="modalSection" style="margin-top: 0.5rem; color: var(--text-muted);">
-                    <i class="fas fa-folder"></i> <span id="modalSectionName">Section Name</span>
+                <div id="modalSection" style="margin-top: 0.5rem; color: var(--text-muted); font-size: 1.1rem;">
+                    <i class="fas fa-folder-open"></i> <span id="modalSectionName">Section Name</span>
                 </div>
             </div>
 
-            <div class="modal-tabs">
-                <button id="tab-approach" class="modal-tab active"
-                    onclick="switchModalTab('approach')">Approach</button>
-                <button id="tab-solutions" class="modal-tab" onclick="switchModalTab('solutions')">Solutions</button>
+            <div class="modal-tabs" style="margin-top: 2.5rem;">
+                <button id="tab-approach" class="modal-tab active" onclick="switchModalTab('approach')">Architectural
+                    Approach</button>
+                <button id="tab-solutions" class="modal-tab" onclick="switchModalTab('solutions')">Code
+                    Solutions</button>
             </div>
 
             <div id="modalContent">
                 <div id="modalApproach" class="modal-body active">
-                    <p id="approachText" style="line-height: 1.8; color: var(--text-secondary);"></p>
+                    <!-- Problem Statement -->
+                    <div class="approach-section">
+                        <div class="approach-title">
+                            <i class="fas fa-align-left"></i>
+                            Problem Statement
+                        </div>
+                        <p id="modalProblemStatement"
+                            style="line-height: 1.8; color: var(--text-secondary); font-size: 1.1rem;"></p>
+                    </div>
+
+                    <!-- Example Input/Output -->
+                    <div class="approach-section">
+                        <div class="approach-title">
+                            <i class="fas fa-terminal"></i>
+                            Input / Output Example
+                        </div>
+                        <div class="example-box">
+                            <div id="modalExampleText" style="color: var(--primary-light);"></div>
+                        </div>
+                    </div>
+
+                    <!-- Procedure / Algorithm -->
+                    <div class="approach-section">
+                        <div class="approach-title">
+                            <i class="fas fa-list-ol"></i>
+                            Procedure / Algorithm
+                        </div>
+                        <div id="modalProcedureSteps" class="procedure-list">
+                            <!-- Steps populated via JS -->
+                        </div>
+                    </div>
+
+                    <!-- Complexity Analysis -->
+                    <div class="approach-section">
+                        <div class="approach-title">
+                            <i class="fas fa-chart-line"></i>
+                            Complexity Analysis
+                        </div>
+                        <div class="complexity-grid">
+                            <div class="complexity-card">
+                                <i class="fas fa-clock"></i>
+                                <div class="complexity-info">
+                                    <span class="complexity-label">Time Complexity</span>
+                                    <span id="modalTimeComplexity" class="complexity-val">O(n)</span>
+                                </div>
+                            </div>
+                            <div class="complexity-card">
+                                <i class="fas fa-memory"></i>
+                                <div class="complexity-info">
+                                    <span class="complexity-label">Space Complexity</span>
+                                    <span id="modalSpaceComplexity" class="complexity-val">O(1)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button id="markSolvedBtn" class="solve-action-btn" onclick="markAsSolved()"
+                        style="margin-top: 2rem;">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Mark as Solved</span>
+                    </button>
                 </div>
                 <div id="modalSolutions" class="modal-body" style="display: none;">
-                    <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                    <div style="display: flex; gap: 0.75rem; margin-bottom: 1.5rem;">
                         <button class="filter-tab active" onclick="switchLanguage('python')"
                             id="lang-python">Python</button>
                         <button class="filter-tab" onclick="switchLanguage('java')" id="lang-java">Java</button>
                         <button class="filter-tab" onclick="switchLanguage('cpp')" id="lang-cpp">C++</button>
                     </div>
                     <pre
-                        style="background: var(--background); padding: 1.5rem; border-radius: var(--radius-md); overflow-x: auto; font-family: 'Fira Code', monospace; font-size: 0.9rem;"><code id="solutionCode"></code></pre>
+                        style="background: #0f0f14; padding: 2rem; border: 1px solid var(--border); border-radius: 16px; overflow-x: auto; font-family: 'Fira Code', monospace; font-size: 1rem; line-height: 1.6;"><code id="solutionCode"></code></pre>
                 </div>
             </div>
-
-            <button id="markSolvedBtn" class="solve-action-btn" onclick="markAsSolved()" style="margin-top: 2rem;">
-                <i class="fas fa-check-circle"></i>
-                <span>Mark as Solved</span>
-            </button>
+            <div id="modalSolutions" class="modal-body" style="display: none;">
+                <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                    <button class="filter-tab active" onclick="switchLanguage('python')"
+                        id="lang-python">Python</button>
+                    <button class="filter-tab" onclick="switchLanguage('java')" id="lang-java">Java</button>
+                    <button class="filter-tab" onclick="switchLanguage('cpp')" id="lang-cpp">C++</button>
+                </div>
+                <pre
+                    style="background: var(--background); padding: 1.5rem; border-radius: var(--radius-md); overflow-x: auto; font-family: 'Fira Code', monospace; font-size: 0.9rem;"><code id="solutionCode"></code></pre>
+            </div>
         </div>
+
+
+    </div>
     </div>
 
     <!-- Theme Manager -->
@@ -925,7 +1199,22 @@
 
         async function init() {
             await loadProgress();
+            await loadStreak();
             await loadCurriculum();
+        }
+
+        async function loadStreak() {
+            try {
+                const res = await fetch(`${API_URL}/progress/stats/${user.id}`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (res.ok) {
+                    const data = await res.json();
+                    document.getElementById('streakCount').textContent = data.current_streak || 0;
+                }
+            } catch (err) {
+                console.error('Failed to load streak:', err);
+            }
         }
 
         async function loadProgress() {
@@ -1074,7 +1363,18 @@
                 });
 
                 if (res.ok) {
+                    const data = await res.json();
                     solvedQuestionIds.add(qId);
+
+                    // Update Streak if returned
+                    if (data.streak !== undefined) {
+                        document.getElementById('streakCount').textContent = data.streak;
+                        // Add temporary larger pulse/animation
+                        const sEl = document.querySelector('.streak-container');
+                        sEl.style.transform = 'scale(1.5)';
+                        setTimeout(() => sEl.style.transform = '', 500);
+                    }
+
                     await loadCurriculum();
                 } else {
                     const data = await res.json();
@@ -1098,7 +1398,29 @@
             diffBadge.textContent = q.difficulty;
             diffBadge.className = `difficulty-badge ${q.difficulty}`;
 
-            document.getElementById('approachText').innerHTML = q.procedure ? q.procedure.replace(/\n/g, '<br>') : 'No approach documented.';
+            // Populate Structured Approach
+            // Assuming the schema has fields or we parse procedure
+            // Schema has: procedure, solution_python, solution_java, solution_cpp, time_complexity, space_complexity, key_insights
+
+            document.getElementById('modalProblemStatement').textContent = q.problem_statement || 'Follow the LeetCode link for the full problem statement.';
+
+            // For example text, if not separate, we can try to find it in procedure or use a placeholder
+            document.getElementById('modalExampleText').innerHTML = `// Sample Case<br>Input: nums = [2, 7, 11, 15], target = 9<br>Output: [0, 1]`;
+
+            // Build Procedure Steps
+            const stepsArea = document.getElementById('modalProcedureSteps');
+            stepsArea.innerHTML = '';
+
+            const steps = q.procedure ? q.procedure.split('\n').filter(s => s.trim()) : ['Study the code solutions for implementation details.'];
+            steps.forEach(stepText => {
+                const stepDiv = document.createElement('div');
+                stepDiv.className = 'procedure-step';
+                stepDiv.innerHTML = `<div class="procedure-text">${stepText}</div>`;
+                stepsArea.appendChild(stepDiv);
+            });
+
+            document.getElementById('modalTimeComplexity').textContent = q.time_complexity || 'O(n)';
+            document.getElementById('modalSpaceComplexity').textContent = q.space_complexity || 'O(1)';
 
             // Default to python solution
             switchLanguage('python');
@@ -1115,6 +1437,18 @@
             }
             modal.classList.add('active');
             switchModalTab('approach');
+        }
+
+        function toggleFullScreen() {
+            const container = document.getElementById('modalContainer');
+            const icon = document.getElementById('fullScreenIcon');
+            container.classList.toggle('full-screen');
+
+            if (container.classList.contains('full-screen')) {
+                icon.classList.replace('fa-expand', 'fa-compress');
+            } else {
+                icon.classList.replace('fa-compress', 'fa-expand');
+            }
         }
 
         function switchLanguage(lang) {
@@ -1173,9 +1507,15 @@
                 });
 
                 if (res.ok) {
+                    const data = await res.json();
                     solvedQuestionIds.add(qId);
                     btn.innerHTML = '<i class="fas fa-check-double"></i> Verified Done';
                     btn.classList.add('is-solved');
+
+                    // Update Streak if returned
+                    if (data.streak !== undefined) {
+                        document.getElementById('streakCount').textContent = data.streak;
+                    }
 
                     // Update main UI without full reload
                     await loadCurriculum();

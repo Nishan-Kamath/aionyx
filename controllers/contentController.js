@@ -65,7 +65,7 @@ exports.deleteSection = async (req, res) => {
 };
 
 exports.createQuestion = async (req, res) => {
-    const { sectionName, title, leetcodeUrl, difficulty, procedure, solution_python, solution_java, solution_cpp, timeComplexity, spaceComplexity, keyInsights } = req.body;
+    const { sectionName, title, leetcodeUrl, difficulty, problemStatement, procedure, solution_python, solution_java, solution_cpp, timeComplexity, spaceComplexity, keyInsights } = req.body;
 
     try {
         // Resolve Section ID
@@ -90,8 +90,8 @@ exports.createQuestion = async (req, res) => {
         }
 
         const result = await pool.query(
-            'INSERT INTO questions (section_id, title, leetcode_url, difficulty, procedure, solution_python, solution_java, solution_cpp, time_complexity, space_complexity, key_insights) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *',
-            [startSectionId, title, leetcodeUrl, difficulty, procedure, solution_python, solution_java, solution_cpp, timeComplexity, spaceComplexity, keyInsights]
+            'INSERT INTO questions (section_id, title, leetcode_url, difficulty, problem_statement, procedure, solution_python, solution_java, solution_cpp, time_complexity, space_complexity, key_insights) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING *',
+            [startSectionId, title, leetcodeUrl, difficulty, problemStatement, procedure, solution_python, solution_java, solution_cpp, timeComplexity, spaceComplexity, keyInsights]
         );
         res.status(201).json(result.rows[0]);
     } catch (err) {
@@ -102,7 +102,7 @@ exports.createQuestion = async (req, res) => {
 
 exports.updateQuestion = async (req, res) => {
     const { id } = req.params;
-    const { sectionName, title, leetcodeUrl, difficulty, procedure, solution_python, solution_java, solution_cpp, timeComplexity, spaceComplexity, keyInsights } = req.body;
+    const { sectionName, title, leetcodeUrl, difficulty, problemStatement, procedure, solution_python, solution_java, solution_cpp, timeComplexity, spaceComplexity, keyInsights } = req.body;
 
     try {
         let startSectionId;
@@ -121,8 +121,8 @@ exports.updateQuestion = async (req, res) => {
         }
 
         const result = await pool.query(
-            `UPDATE questions SET section_id = $1, title = $2, leetcode_url = $3, difficulty = $4, procedure = $5, solution_python = $6, solution_java = $7, solution_cpp = $8, time_complexity = $9, space_complexity = $10, key_insights = $11, updated_at = CURRENT_TIMESTAMP WHERE id = $12 RETURNING *`,
-            [startSectionId, title, leetcodeUrl, difficulty, procedure, solution_python, solution_java, solution_cpp, timeComplexity, spaceComplexity, keyInsights, id]
+            `UPDATE questions SET section_id = $1, title = $2, leetcode_url = $3, difficulty = $4, problem_statement = $5, procedure = $6, solution_python = $7, solution_java = $8, solution_cpp = $9, time_complexity = $10, space_complexity = $11, key_insights = $12, updated_at = CURRENT_TIMESTAMP WHERE id = $13 RETURNING *`,
+            [startSectionId, title, leetcodeUrl, difficulty, problemStatement, procedure, solution_python, solution_java, solution_cpp, timeComplexity, spaceComplexity, keyInsights, id]
         );
         if (result.rows.length === 0) {
             return res.status(404).json({ message: 'Question not found' });

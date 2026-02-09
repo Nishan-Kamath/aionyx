@@ -223,7 +223,7 @@
                 <p>Access the most comprehensive algorithmic training platform and accelerate your engineering career.
                 </p>
                 <ul class="feature-list">
-                    <li class="feature-item"><i class="fas fa-check"></i> 500+ Curated Problems</li>
+                    <li class="feature-item"><i class="fas fa-check"></i> 200+ Curated Problems</li>
                     <li class="feature-item"><i class="fas fa-chart-line"></i> Performance Analytics</li>
                     <li class="feature-item"><i class="fas fa-microchip"></i> System Design Modules</li>
                     <li class="feature-item"><i class="fas fa-shield-alt"></i> Enterprise Recognition</li>
@@ -261,9 +261,9 @@
                 </form>
 
                 <div class="auth-footer">
-                    <p>Already registered? <a href="student-login.html">Sign In</a></p>
+                    <p>Already registered? <a href="student-login">Sign In</a></p>
                     <div style="margin-top: 1rem;">
-                        <a href="index.html" style="color: var(--text-muted); font-size: 0.85rem;">
+                        <a href="/" style="color: var(--text-muted); font-size: 0.85rem;">
                             <i class="fas fa-arrow-left"></i> Return to Terminal
                         </a>
                     </div>
@@ -312,7 +312,7 @@
                     signupBtn.innerHTML = '<i class="fas fa-check"></i> Enrollment Successful';
 
                     setTimeout(() => {
-                        window.location.href = 'student-login.html?signup=success';
+                        window.location.href = 'student-signup?signup=success';
                     }, 1000);
                 } else {
                     errorMessage.textContent = data.message || 'Enrollment Failure';

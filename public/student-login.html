@@ -195,9 +195,9 @@
             </form>
 
             <div class="auth-footer">
-                <p>New candidate? <a href="student-signup.html">Enrollment Application</a></p>
+                <p>New candidate? <a href="student-signup">Enrollment Application</a></p>
                 <div style="margin-top: 1rem;">
-                    <a href="index.html" style="color: var(--text-muted); font-size: 0.85rem;">
+                    <a href="/" style="color: var(--text-muted); font-size: 0.85rem;">
                         <i class="fas fa-arrow-left"></i> Return to Terminal
                     </a>
                 </div>
@@ -245,9 +245,9 @@
                     localStorage.setItem('user', JSON.stringify(data.user));
 
                     if (data.user.role === 'admin') {
-                        window.location.href = 'admin-dashboard.html';
+                        window.location.href = 'admin-dashboard';
                     } else {
-                        window.location.href = 'student-dashboard.html';
+                        window.location.href = 'student-courses';
                     }
                 } else {
                     errorMessage.textContent = data.message || 'Access Denied: Invalid Credentials';

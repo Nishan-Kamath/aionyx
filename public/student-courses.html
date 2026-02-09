@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Courses - AIONYX</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="css/theme.css">
+
+    <style>
+        body {
+            padding-top: 80px;
+            background: var(--background);
+            min-height: 100vh;
+        }
+
+        .dashboard-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .welcome-header {
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .welcome-header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--text-primary), var(--text-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .welcome-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+        }
+
+        /* Course Grid */
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .course-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .course-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--border-hover);
+        }
+
+        .course-card:hover .course-image img {
+            transform: scale(1.05);
+        }
+
+        .course-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .course-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .course-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.8) 100%);
+        }
+
+        .course-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-transform: uppercase;
+        }
+
+        .course-content {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .course-title {
+            font-size: 1.25rem;
+            font-weight: 800;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+        }
+
+        .course-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            flex: 1;
+        }
+
+        .course-meta {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .meta-item i {
+            color: var(--primary);
+        }
+
+        .skills-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 1.5rem 0;
+        }
+
+        .skills-list li {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .skills-list li::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--primary);
+            border-radius: 50%;
+        }
+
+        .btn-course {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+            box-shadow: var(--glow-primary);
+        }
+
+        .btn-course:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
+        }
+
+        .section-separator {
+            margin: 4rem 0 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-separator span {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            white-space: nowrap;
+        }
+
+        .section-separator::after {
+            content: '';
+            height: 1px;
+            width: 100%;
+            background: var(--border);
+        }
+
+        @media (max-width: 768px) {
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .welcome-header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="/" class="logo">
+            <i class="fas fa-code"></i>
+            <span class="logo-text">AIONYX</span>
+        </a>
+        <div class="nav-links">
+            <span id="userName" style="color: var(--text-muted); font-weight: 600;">Student</span>
+            <button id="logoutBtn" class="btn btn-ghost">
+                Logout
+            </button>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <div class="welcome-header">
+            <h1 id="welcomeTitle">Welcome Back</h1>
+            <p>Continue your learning journey. Select a course to resume your progress.</p>
+        </div>
+
+        <div class="section-separator">
+            <span>Enrolled Courses</span>
+        </div>
+
+        <div class="courses-grid">
+            <!-- DSA Course Card (Active) -->
+            <div class="course-card">
+                <div class="course-image">
+                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=1000"
+                        alt="DSA">
+                    <div class="course-overlay"></div>
+                    <div class="course-badge"
+                        style="background: rgba(16, 185, 129, 0.2); border-color: rgba(16, 185, 129, 0.3); color: #34d399;">
+                        Active</div>
+                </div>
+                <div class="course-content">
+                    <h3 class="course-title">DSA Pathways — Interview Ready</h3>
+                    <p class="course-description">
+                        Master Data Structures & Algorithms with our comprehensive curriculum designed for top-tier tech
+                        interviews.
+                    </p>
+
+                    <ul class="skills-list">
+                        <li>Arrays, Linked Lists, Trees</li>
+                        <li>Dynamic Programming & Graphs</li>
+                        <li>System Design Basics</li>
+                    </ul>
+
+                    <div class="course-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-signal"></i>
+                            <span>Beginner to Advanced Level</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-video"></i>
+                            <span>50+ Hours</span>
+                        </div>
+                    </div>
+
+                    <a href="student-dashboard" class="btn-course">
+                        Open Dashboard <i class="fas fa-arrow-right" style="margin-left: 8px;"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Sorting & Searching (Placeholder from user image) -->
+            <div class="course-card" style="opacity: 0.8;">
+                <div class="course-image">
+                    <img src="https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&q=80&w=1000"
+                        alt="Sorting">
+                    <div class="course-overlay"></div>
+                    <div class="course-badge">Module</div>
+                </div>
+                <div class="course-content">
+                    <h3 class="course-title">Sorting & Searching Deep Dive</h3>
+                    <p class="course-description">
+                        Understand sorts, stability and advanced search strategies.
+                    </p>
+                    <ul class="skills-list">
+                        <li>Quick / Merge / Heap</li>
+                        <li>Binary Search variants</li>
+                        <li>Order-statistics</li>
+                    </ul>
+                    <div class="course-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-layer-group"></i>
+                            <span>Beginner → Intermediate</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline" style="width: 100%; border-radius: var(--radius-md);">Open
+                        Module</button>
+                </div>
+            </div>
+
+            <!-- Contest Bootcamp (Placeholder) -->
+            <div class="course-card" style="opacity: 0.8;">
+                <div class="course-image">
+                    <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=1000"
+                        alt="Contest">
+                    <div class="course-overlay"></div>
+                    <div class="course-badge">Module</div>
+                </div>
+                <div class="course-content">
+                    <h3 class="course-title">Contest Bootcamp</h3>
+                    <p class="course-description">
+                        Build speed with contest-style problem sequences.
+                    </p>
+                    <ul class="skills-list">
+                        <li>Time management</li>
+                        <li>Optimization techniques</li>
+                        <li>Speed coding templates</li>
+                    </ul>
+                    <div class="course-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-bolt"></i>
+                            <span>Advanced</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline" style="width: 100%; border-radius: var(--radius-md);">Open
+                        Module</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="section-separator">
+            <span>Coming Soon</span>
+        </div>
+
+        <div class="courses-grid">
+            <!-- System Design (Locked) -->
+            <div class="course-card" style="opacity: 0.7;">
+                <div class="course-image">
+                    <img src="https://images.unsplash.com/photo-1558494949-ef526b01201b?auto=format&fit=crop&q=80&w=1000"
+                        alt="System Design">
+                    <div class="course-overlay"></div>
+                    <div class="course-badge"
+                        style="background: rgba(239, 68, 68, 0.2); border-color: rgba(239, 68, 68, 0.3);"><i
+                            class="fas fa-lock" style="font-size: 0.7rem; margin-right: 4px;"></i> Locked</div>
+                </div>
+                <div class="course-content">
+                    <h3 class="course-title">High Level System Design</h3>
+                    <p class="course-description">
+                        Learn to design scalable systems for millions of users.
+                    </p>
+                    <button class="btn btn-ghost" disabled
+                        style="width: 100%; border-radius: var(--radius-md); font-weight: 700;">Coming Soon</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Theme Manager -->
+    <script src="js/theme.js"></script>
+
+    <script>
+        // Auth Check
+        const token = localStorage.getItem('token');
+        const user = JSON.parse(localStorage.getItem('user') || '{}');
+
+        if (!token) {
+            window.location.href = 'student-login';
+        }
+
+        // Update user info
+        if (user.name) {
+            document.getElementById('userName').textContent = user.name;
+            document.getElementById('welcomeTitle').textContent = `Welcome Back, ${user.name.split(' ')[0]}`;
+        }
+
+        // Logout
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            localStorage.clear();
+            window.location.href = 'student-login';
+        });
+
+        // Module Buttons Logic
+        document.querySelectorAll('.btn-outline').forEach(btn => {
+            btn.addEventListener('click', () => {
+                // For now, these modules also redirect to the main dashboard
+                // or we could show a "Module specific view" if that existed.
+                // Per user request, "when they clcik on tht dsa course it then only next student dahdboard with dsa questions should open"
+                // So I will make the other buttons just alert or also go to dashboard for now?
+                // The prompt says "retain other all features same".
+                // I'll make them all go to dashboard for now to avoid broken links, or maybe just an alert "Module content coming soon"
+                // except the Main DSA one.
+                // Let's make them alert for now to strictly follow "when they click on THAT dsa course".
+                // Actually the user said "do it like tht..as abv img.". The image has specific modules.
+                // But the main request is the flow.
+                // I'll redirect the main DSA one to student-dashboard.
+                // I'll make the others alert feature not available.
+                alert('This specific module view is coming soon. Please access via the main DSA Pathways course.');
+            });
+        });
+
+    </script>
+</body>
+
+</html>

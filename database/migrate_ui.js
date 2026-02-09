@@ -13,5 +13,4 @@ const migrate = async () => {
         process.exit(1);
     }
 };
-
 migrate();

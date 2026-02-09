@@ -916,16 +916,19 @@
         });
     </script>
     <nav class="navbar">
-        <a href="index.html" class="logo">
+        <a href="/" class="logo">
             <i class="fas fa-code"></i>
             <span class="logo-text">AIONYX</span>
         </a>
+        <div class="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </div>
         <div class="nav-links">
-            <a href="courses.html" class="nav-item">Courses</a>
-            <a href="about.html" class="nav-item">About Us</a>
-            <a href="contact.html" class="nav-item">Contact</a>
-            <a href="student-login.html" class="nav-btn btn-login">Login</a>
-            <a href="student-signup.html" class="nav-btn btn-signup">Get Started</a>
+            <a href="courses" class="nav-item">Courses</a>
+            <a href="about" class="nav-item">About Us</a>
+            <a href="contact" class="nav-item">Contact</a>
+            <a href="student-login" class="nav-btn btn-login">Login</a>
+            <a href="student-signup" class="nav-btn btn-signup">Get Started</a>
         </div>
     </nav>
 
@@ -946,7 +949,7 @@
                 <div class="hero-content reveal-left">
                     <div class="hero-badge glow-pulse">
                         <i class="fas fa-star"></i>
-                        <span>Trusted by 10,000+ Students</span>
+                        <span>Trusted by 1K+ Students</span>
                     </div>
 
                     <h1 class="reveal-up">
@@ -961,7 +964,7 @@
                     <div class="hero-features reveal-up" style="transition-delay: 0.3s;">
                         <div class="hero-feature">
                             <i class="fas fa-check-circle"></i>
-                            <span>500+ Curated Problems with Detailed Solutions</span>
+                            <span>200+ Curated Problems with Detailed Solutions</span>
                         </div>
                         <div class="hero-feature">
                             <i class="fas fa-check-circle"></i>
@@ -974,25 +977,31 @@
                     </div>
 
                     <div class="hero-cta reveal-up" style="transition-delay: 0.4s;">
-                        <a href="student-signup.html" class="btn btn-primary">
+                        <a href="student-signup" class="btn btn-primary">
                             Get Started
                         </a>
-                        <a href="about.html" class="btn btn-outline">
+                        <a href="about" class="btn btn-outline">
                             Explore Platform
                         </a>
                     </div>
 
                     <div class="hero-stats">
                         <div class="hero-stat">
-                            <span class="hero-stat-number">500+</span>
+                            <i class="fas fa-code"
+                                style="color: var(--primary); margin-bottom: 0.5rem; display: block; font-size: 1.2rem;"></i>
+                            <span class="hero-stat-number counter" data-target="200" data-suffix="+">0</span>
                             <span class="hero-stat-label">Problems</span>
                         </div>
                         <div class="hero-stat">
-                            <span class="hero-stat-number">10K+</span>
+                            <i class="fas fa-users"
+                                style="color: var(--secondary); margin-bottom: 0.5rem; display: block; font-size: 1.2rem;"></i>
+                            <span class="hero-stat-number counter" data-target="1" data-suffix="K+">0</span>
                             <span class="hero-stat-label">Students</span>
                         </div>
                         <div class="hero-stat">
-                            <span class="hero-stat-number">95%</span>
+                            <i class="fas fa-trophy"
+                                style="color: var(--accent, var(--primary)); margin-bottom: 0.5rem; display: block; font-size: 1.2rem;"></i>
+                            <span class="hero-stat-number counter" data-target="95" data-suffix="%">0</span>
                             <span class="hero-stat-label">Success Rate</span>
                         </div>
                     </div>
@@ -1005,7 +1014,7 @@
 
                     <div class="floating-card floating-card-1">
                         <h4>Active Students</h4>
-                        <p>2,847</p>
+                        <p>1K+</p>
                     </div>
 
                     <div class="floating-card floating-card-2">
@@ -1264,9 +1273,8 @@
                     </div>
                     <div class="roadmap-node"></div>
                     <div class="roadmap-image">
-                        <!-- High-quality Unsplash image for Code/Tech -->
-                        <img src="https://images.unsplash.com/photo-1555099962-4199c345e5dd?q=80&w=1000&auto=format&fit=crop"
-                            alt="Foundations">
+                        <!-- High-fidelity Local Foundations Asset -->
+                        <img src="images/hero_coding_workspace.png?v=fixed_local_final" alt="Foundations">
                     </div>
                 </div>
 
@@ -1281,9 +1289,8 @@
                     </div>
                     <div class="roadmap-node"></div>
                     <div class="roadmap-image">
-                        <!-- High-quality theme-matching image for Structural Mastery -->
-                        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1000&auto=format&fit=crop"
-                            alt="Structural Mastery">
+                        <!-- High-fidelity Local Structural Mastery Asset -->
+                        <img src="images/dsa_roadmap.png?v=fixed_local_final" alt="Structural Mastery">
                     </div>
                 </div>
             </div>
@@ -1336,33 +1343,26 @@
                     <div class="stat-icon">
                         <i class="fas fa-code"></i>
                     </div>
-                    <span class="stat-number">500+</span>
-                    <span class="stat-label">Coding Problems</span>
+                    <span class="stat-number counter" data-target="200" data-suffix="+">0</span>
+                    <span class="stat-label">Problems</span>
                 </div>
 
                 <div class="stat-card reveal-up" style="transition-delay: 0.1s;">
                     <div class="stat-icon">
                         <i class="fas fa-users"></i>
                     </div>
-                    <span class="stat-number">10,000+</span>
-                    <span class="stat-label">Active Students</span>
+                    <span class="stat-number counter" data-target="1" data-suffix="K+">0</span>
+                    <span class="stat-label">Students</span>
                 </div>
 
                 <div class="stat-card reveal-up" style="transition-delay: 0.2s;">
                     <div class="stat-icon">
                         <i class="fas fa-trophy"></i>
                     </div>
-                    <span class="stat-number">95%</span>
+                    <span class="stat-number counter" data-target="95" data-suffix="%">0</span>
                     <span class="stat-label">Success Rate</span>
                 </div>
 
-                <div class="stat-card reveal-up" style="transition-delay: 0.3s;">
-                    <div class="stat-icon">
-                        <i class="fas fa-building"></i>
-                    </div>
-                    <span class="stat-number">200+</span>
-                    <span class="stat-label">Companies Hired</span>
-                </div>
             </div>
         </div>
     </section>
@@ -1470,8 +1470,7 @@
                 </h2>
             </div>
 
-            <div class="arch-grid"
-                style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 60px;">
+            <div class="arch-grid">
                 <!-- Box 1 -->
                 <div class="arch-box reveal-up"
                     style="background: var(--surface-elevated); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 40px; position: relative; overflow: hidden; transition: all 0.5s ease;">
@@ -1543,11 +1542,11 @@
                     <h2>Ready to Ace Your Next Interview?</h2>
                     <p>Join thousands of successful students who landed their dream jobs with AIONYX</p>
                     <div class="cta-buttons">
-                        <a href="student-signup.html" class="btn btn-white">
+                        <a href="student-signup" class="btn btn-white">
                             <i class="fas fa-rocket"></i>
                             Start Free Trial
                         </a>
-                        <a href="student-login.html" class="btn btn-outline" style="border-color: white; color: white;">
+                        <a href="student-login" class="btn btn-outline" style="border-color: white; color: white;">
                             <i class="fas fa-sign-in-alt"></i>
                             Sign In
                         </a>
@@ -1558,41 +1557,56 @@
     </section>
 
     <!-- Footer -->
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
+                <!-- Brand -->
                 <div class="footer-brand">
-                    <h3><i class="fas fa-code"></i> AIONYX</h3>
-                    <p>Empowering developers to master coding interviews with AI-powered learning and expert guidance.
+                    <a href="/" class="logo">
+                        <i class="fas fa-code"></i>
+                        <span class="logo-text">AIONYX</span>
+                    </a>
+                    <p
+                        style="font-size: 1.1rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto; line-height: 1.6;">
+                        Expert trainers and mentors dedicated to simplifying complex engineering concepts and
+                        accelerating your technical mastery.
                     </p>
                     <div class="footer-social">
-                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.linkedin.com/company/algoorbit/" target="_blank" class="social-link"><i
+                                class="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.instagram.com/algoorbit_official/" target="_blank" class="social-link"><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="https://www.facebook.com/people/Aionyx-AI/pfbid026ZtArzFeEPxSGu9tgG6QXsxkiYUmw4LMGqCgV87sP3ufxCVPPv7BFCoxc5jF7JvMl/"
+                            target="_blank" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.whatsapp.com/channel/0029VbBktvfAYlUS6kToth1B" target="_blank"
+                            class="social-link"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
 
+                <!-- Platform -->
                 <div class="footer-section">
                     <h4>Platform</h4>
                     <ul class="footer-links">
-                        <li><a href="#features">Features</a></li>
+                        <li><a href="#">Features</a></li>
                         <li><a href="#">Pricing</a></li>
                         <li><a href="#">Problems</a></li>
                         <li><a href="#">Resources</a></li>
                     </ul>
                 </div>
 
+                <!-- Company -->
                 <div class="footer-section">
                     <h4>Company</h4>
                     <ul class="footer-links">
-                        <li><a href="#">About Us</a></li>
+                        <li><a href="about">About Us</a></li>
                         <li><a href="#">Careers</a></li>
                         <li><a href="#">Blog</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li><a href="contact">Contact</a></li>
                     </ul>
                 </div>
 
+                <!-- Legal -->
                 <div class="footer-section">
                     <h4>Legal</h4>
                     <ul class="footer-links">
@@ -1603,7 +1617,6 @@
                     </ul>
                 </div>
             </div>
-
             <div class="footer-bottom">
                 <p>&copy; 2026 AIONYX. All rights reserved. Built for developers.</p>
             </div>

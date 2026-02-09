@@ -286,20 +286,78 @@
             }
         }
     </style>
+    <style>
+        /* Responsive Fixes */
+        @media (max-width: 768px) {
+            .courses-hero {
+                padding: 120px 0 60px;
+            }
+
+            .courses-hero h1 {
+                font-size: 2.5rem !important;
+                /* Override inline style if not removed */
+            }
+
+            .courses-hero p {
+                font-size: 1rem !important;
+                padding: 0 20px;
+            }
+
+            .dsa-card-bg {
+                width: 100%;
+                height: 100%;
+                opacity: 0.15;
+            }
+
+            .roadmap-item {
+                flex-direction: column !important;
+                margin-bottom: 60px;
+                gap: 40px;
+            }
+
+            .roadmap-item:nth-child(even) {
+                flex-direction: column !important;
+            }
+
+            .roadmap-content {
+                width: 100%;
+                min-height: auto;
+                padding: 30px;
+                text-align: center;
+            }
+
+            .roadmap-image {
+                width: 100%;
+                height: 250px;
+            }
+
+            .roadmap-line,
+            .roadmap-dot {
+                display: none;
+            }
+
+            .container {
+                padding: 0 20px;
+            }
+        }
+    </style>
 </head>
 
 <body class="dark-theme">
     <nav class="navbar">
-        <a href="index.html" class="logo">
+        <a href="/" class="logo">
             <i class="fas fa-code"></i>
             <span class="logo-text">AIONYX</span>
         </a>
+        <div class="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </div>
         <div class="nav-links">
-            <a href="courses.html" class="nav-item">Courses</a>
-            <a href="about.html" class="nav-item">About Us</a>
-            <a href="contact.html" class="nav-item">Contact</a>
-            <a href="student-login.html" class="nav-btn btn-login">Login</a>
-            <a href="student-signup.html" class="nav-btn btn-signup">Get Started</a>
+            <a href="courses" class="nav-item">Courses</a>
+            <a href="about" class="nav-item">About Us</a>
+            <a href="contact" class="nav-item">Contact</a>
+            <a href="student-login" class="nav-btn btn-login">Login</a>
+            <a href="student-signup" class="nav-btn btn-signup">Get Started</a>
         </div>
     </nav>
 
@@ -317,12 +375,11 @@
         <div class="dsa-card-bg"></div>
         <div class="container section-reveal active">
             <span class="hero-badge reveal-up active" style="position: relative;">ELITE ENGINEERING</span>
-            <h1 class="reveal-up active"
-                style="font-size: 4.5rem; font-weight: 900; margin-bottom: 20px; position: relative;">
+            <h1 class="reveal-up active" style="font-weight: 900; margin-bottom: 20px; position: relative;">
                 Advanced <span class="text-gradient">DSA Masterclass</span>
             </h1>
             <p class="reveal-up active"
-                style="max-width: 800px; margin: 0 auto 40px; font-size: 1.2rem; color: var(--text-secondary); position: relative;">
+                style="max-width: 800px; margin: 0 auto 40px; color: var(--text-secondary); position: relative;">
                 Master the architectural patterns of data structures and algorithms. Go beyond coding—learn to architect
                 solutions that scale for the world's most demanding tech companies.
             </p>
@@ -373,8 +430,7 @@
                     </div>
                     <div class="roadmap-dot"></div>
                     <div class="roadmap-image reveal-right active">
-                        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=1000"
-                            alt="Foundations">
+                        <img src="images/hero_coding_workspace.png?v=fixed_local_final" alt="Foundations">
                     </div>
                 </div>
 
@@ -389,8 +445,7 @@
                     </div>
                     <div class="roadmap-dot"></div>
                     <div class="roadmap-image reveal-left active">
-                        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1000&auto=format&fit=crop"
-                            alt="Structural Mastery">
+                        <img src="images/dsa_roadmap.png?v=fixed_local_final" alt="Structural Mastery">
                     </div>
                 </div>
 
@@ -405,8 +460,7 @@
                     </div>
                     <div class="roadmap-dot"></div>
                     <div class="roadmap-image reveal-right active">
-                        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1000"
-                            alt="Tree Architect">
+                        <img src="images/dsa_hero.png?v=fixed_local_final" alt="Tree Architect">
                     </div>
                 </div>
 
@@ -421,183 +475,14 @@
                     </div>
                     <div class="roadmap-dot"></div>
                     <div class="roadmap-image reveal-left active">
-                        <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&q=80&w=1000"
-                            alt="Elite Optimization">
+                        <img src="images/admin_dashboard_hero.png?v=fixed_local_final" alt="Elite Optimization">
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Topics Hierarchy Section -->
-    <section class="topics-section section-reveal active" style="padding: 100px 0; background: var(--background);">
-        <div class="container">
-            <div class="section-header" style="text-align: center; margin-bottom: 80px;">
-                <span class="section-badge">CURRICULUM STRUCTURE</span>
-                <h2 class="section-title">Master DSA <span class="text-gradient">Topic by Topic</span></h2>
-                <p class="section-description" style="max-width: 700px; margin: 20px auto 0;">
-                    Our comprehensive curriculum covers every essential data structure and algorithm pattern you'll
-                    encounter in technical interviews.
-                </p>
-            </div>
 
-            <div class="topics-flowchart"
-                style="max-width: 900px; margin: 0 auto; position: relative; min-height: 920px;">
-                <!-- SVG for connecting lines -->
-                <svg
-                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0;">
-                    <!-- Arrays to Two Pointers & Stack -->
-                    <line x1="50%" y1="80" x2="35%" y2="140" stroke="rgba(139, 92, 246, 0.5)" stroke-width="2.5" />
-                    <line x1="50%" y1="80" x2="65%" y2="140" stroke="rgba(139, 92, 246, 0.5)" stroke-width="2.5" />
-
-                    <!-- Two Pointers & Stack to next level -->
-                    <line x1="35%" y1="200" x2="25%" y2="260" stroke="rgba(139, 92, 246, 0.5)" stroke-width="2.5" />
-                    <line x1="35%" y1="200" x2="50%" y2="260" stroke="rgba(139, 92, 246, 0.5)" stroke-width="2.5" />
-                    <line x1="65%" y1="200" x2="75%" y2="260" stroke="rgba(139, 92, 246, 0.5)" stroke-width="2.5" />
-
-                    <!-- Three boxes to Trees -->
-                    <line x1="25%" y1="320" x2="50%" y2="380" stroke="rgba(139, 92, 246, 0.5)" stroke-width="2.5" />
-                    <line x1="50%" y1="320" x2="50%" y2="380" stroke="rgba(139, 92, 246, 0.5)" stroke-width="2.5" />
-                    <line x1="75%" y1="320" x2="50%" y2="380" stroke="rgba(139, 92, 246, 0.5)" stroke-width="2.5" />
-
-                    <!-- Trees to Tries & Backtracking -->
-                    <line x1="50%" y1="440" x2="35%" y2="500" stroke="rgba(139, 92, 246, 0.5)" stroke-width="2.5" />
-                    <line x1="50%" y1="440" x2="65%" y2="500" stroke="rgba(139, 92, 246, 0.5)" stroke-width="2.5" />
-
-                    <!-- Tries & Backtracking to Heap/Graphs/1D-DP -->
-                    <line x1="35%" y1="560" x2="25%" y2="620" stroke="rgba(139, 92, 246, 0.5)" stroke-width="2.5" />
-                    <line x1="35%" y1="560" x2="50%" y2="620" stroke="rgba(139, 92, 246, 0.5)" stroke-width="2.5" />
-                    <line x1="65%" y1="560" x2="75%" y2="620" stroke="rgba(139, 92, 246, 0.5)" stroke-width="2.5" />
-
-                    <!-- Heap/Graphs/1D-DP to bottom row -->
-                    <line x1="25%" y1="680" x2="20%" y2="740" stroke="rgba(139, 92, 246, 0.5)" stroke-width="2.5" />
-                    <line x1="25%" y1="680" x2="35%" y2="740" stroke="rgba(139, 92, 246, 0.5)" stroke-width="2.5" />
-                    <line x1="50%" y1="680" x2="50%" y2="740" stroke="rgba(139, 92, 246, 0.5)" stroke-width="2.5" />
-                    <line x1="75%" y1="680" x2="65%" y2="740" stroke="rgba(139, 92, 246, 0.5)" stroke-width="2.5" />
-                    <line x1="75%" y1="680" x2="80%" y2="740" stroke="rgba(139, 92, 246, 0.5)" stroke-width="2.5" />
-
-                    <!-- Bottom row to Math & Geometry -->
-                    <line x1="20%" y1="800" x2="50%" y2="860" stroke="rgba(139, 92, 246, 0.5)" stroke-width="2.5" />
-                    <line x1="35%" y1="800" x2="50%" y2="860" stroke="rgba(139, 92, 246, 0.5)" stroke-width="2.5" />
-                    <line x1="50%" y1="800" x2="50%" y2="860" stroke="rgba(139, 92, 246, 0.5)" stroke-width="2.5" />
-                    <line x1="65%" y1="800" x2="50%" y2="860" stroke="rgba(139, 92, 246, 0.5)" stroke-width="2.5" />
-                    <line x1="80%" y1="800" x2="50%" y2="860" stroke="rgba(139, 92, 246, 0.5)" stroke-width="2.5" />
-                </svg>
-
-                <!-- Arrays & Hashing -->
-                <div class="topic-level"
-                    style="display: flex; justify-content: center; margin-bottom: 40px; position: relative; z-index: 1;">
-                    <div class="topic-box reveal-up active">
-                        <i class="fas fa-layer-group"></i>
-                        <span>Arrays & Hashing</span>
-                    </div>
-                </div>
-
-                <!-- Two Pointers & Stack -->
-                <div class="topic-level"
-                    style="display: flex; justify-content: center; gap: 40px; margin-bottom: 40px; position: relative; z-index: 1;">
-                    <div class="topic-box reveal-up active" style="transition-delay: 0.1s;">
-                        <i class="fas fa-arrows-left-right"></i>
-                        <span>Two Pointers</span>
-                    </div>
-                    <div class="topic-box reveal-up active" style="transition-delay: 0.2s;">
-                        <i class="fas fa-layer-group"></i>
-                        <span>Stack</span>
-                    </div>
-                </div>
-
-                <!-- Binary Search, Sliding Window, Linked List -->
-                <div class="topic-level"
-                    style="display: flex; justify-content: center; gap: 30px; margin-bottom: 40px; position: relative; z-index: 1;">
-                    <div class="topic-box reveal-up active" style="transition-delay: 0.1s;">
-                        <i class="fas fa-search"></i>
-                        <span>Binary Search</span>
-                    </div>
-                    <div class="topic-box reveal-up active" style="transition-delay: 0.2s;">
-                        <i class="fas fa-window-maximize"></i>
-                        <span>Sliding Window</span>
-                    </div>
-                    <div class="topic-box reveal-up active" style="transition-delay: 0.3s;">
-                        <i class="fas fa-link"></i>
-                        <span>Linked List</span>
-                    </div>
-                </div>
-
-                <!-- Trees -->
-                <div class="topic-level"
-                    style="display: flex; justify-content: center; margin-bottom: 40px; position: relative; z-index: 1;">
-                    <div class="topic-box reveal-up active">
-                        <i class="fas fa-tree"></i>
-                        <span>Trees</span>
-                    </div>
-                </div>
-
-                <!-- Tries & Backtracking -->
-                <div class="topic-level"
-                    style="display: flex; justify-content: center; gap: 40px; margin-bottom: 40px; position: relative; z-index: 1;">
-                    <div class="topic-box reveal-up active" style="transition-delay: 0.1s;">
-                        <i class="fas fa-project-diagram"></i>
-                        <span>Tries</span>
-                    </div>
-                    <div class="topic-box reveal-up active" style="transition-delay: 0.2s;">
-                        <i class="fas fa-undo"></i>
-                        <span>Backtracking</span>
-                    </div>
-                </div>
-
-                <!-- Heap, Graphs, 1-D DP -->
-                <div class="topic-level"
-                    style="display: flex; justify-content: center; gap: 30px; margin-bottom: 40px;">
-                    <div class="topic-box reveal-up active" style="transition-delay: 0.1s;">
-                        <i class="fas fa-sort-amount-up"></i>
-                        <span>Heap / Priority Queue</span>
-                    </div>
-                    <div class="topic-box reveal-up active" style="transition-delay: 0.2s;">
-                        <i class="fas fa-project-diagram"></i>
-                        <span>Graphs</span>
-                    </div>
-                    <div class="topic-box reveal-up active" style="transition-delay: 0.3s;">
-                        <i class="fas fa-chart-line"></i>
-                        <span>1-D DP</span>
-                    </div>
-                </div>
-
-                <!-- Bottom Row -->
-                <div class="topic-level"
-                    style="display: flex; justify-content: center; gap: 30px; margin-bottom: 40px;">
-                    <div class="topic-box reveal-up active" style="transition-delay: 0.1s;">
-                        <i class="fas fa-clock"></i>
-                        <span>Intervals</span>
-                    </div>
-                    <div class="topic-box reveal-up active" style="transition-delay: 0.2s;">
-                        <i class="fas fa-balance-scale"></i>
-                        <span>Greedy</span>
-                    </div>
-                    <div class="topic-box reveal-up active" style="transition-delay: 0.3s;">
-                        <i class="fas fa-network-wired"></i>
-                        <span>Advanced Graphs</span>
-                    </div>
-                    <div class="topic-box reveal-up active" style="transition-delay: 0.4s;">
-                        <i class="fas fa-table"></i>
-                        <span>2-D DP</span>
-                    </div>
-                    <div class="topic-box reveal-up active" style="transition-delay: 0.5s;">
-                        <i class="fas fa-microchip"></i>
-                        <span>Bit Manipulation</span>
-                    </div>
-                </div>
-
-                <!-- Math & Geometry -->
-                <div class="topic-level"
-                    style="display: flex; justify-content: center; position: relative; z-index: 1;">
-                    <div class="topic-box reveal-up active">
-                        <i class="fas fa-calculator"></i>
-                        <span>Math & Geometry</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <style>
         .topic-box {
@@ -635,6 +520,36 @@
                 padding: 14px 20px;
             }
         }
+
+        .premium-card {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 1.5rem !important;
+        }
+
+        .premium-card h3 {
+            font-size: 0.8rem !important;
+            margin-bottom: 0.5rem;
+        }
+
+        .premium-card .price-tag {
+            font-size: 2.5rem !important;
+            margin: 1rem 0;
+        }
+
+        .premium-card ul {
+            margin: 1.5rem 0 !important;
+            font-size: 0.9rem;
+        }
+
+        .premium-card ul li {
+            margin-bottom: 8px !important;
+        }
+
+        .btn-enroll {
+            padding: 0.8rem 1.5rem !important;
+            font-size: 0.9rem !important;
+        }
     </style>
 
     <section class="pricing-section section-reveal active">
@@ -663,17 +578,60 @@
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="container" style="text-align: center;">
-            <div style="margin-bottom: 30px;">
-                <h3><i class="fas fa-code"></i> AIONYX</h3>
-                <p style="color: var(--text-secondary); max-width: 600px; margin: 15px auto;">
-                    Empowering developers to master coding interviews with AI-powered learning and expert guidance.
-                </p>
-                <div class="footer-social" style="display: flex; gap: 15px; justify-content: center; margin-top: 20px;">
-                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-github"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+        <div class="container">
+            <div class="footer-content">
+                <!-- Brand -->
+                <div class="footer-brand">
+                    <a href="/" class="logo">
+                        <i class="fas fa-code"></i>
+                        <span class="logo-text">AIONYX</span>
+                    </a>
+                    <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 2rem; margin-top: 1rem;">
+                        Empowering developers to master coding interviews with AI-powered learning and expert guidance.
+                    </p>
+                    <div class="footer-social">
+                        <a href="https://www.linkedin.com/company/algoorbit/" target="_blank" class="social-link"><i
+                                class="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.instagram.com/algoorbit_official/" target="_blank" class="social-link"><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="https://www.facebook.com/people/Aionyx-AI/pfbid026ZtArzFeEPxSGu9tgG6QXsxkiYUmw4LMGqCgV87sP3ufxCVPPv7BFCoxc5jF7JvMl/"
+                            target="_blank" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.whatsapp.com/channel/0029VbBktvfAYlUS6kToth1B" target="_blank"
+                            class="social-link"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <!-- Platform -->
+                <div class="footer-section">
+                    <h4>Platform</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Problems</a></li>
+                        <li><a href="#">Resources</a></li>
+                    </ul>
+                </div>
+
+                <!-- Company -->
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="about">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="contact">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Legal -->
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">GDPR</a></li>
+                    </ul>
                 </div>
             </div>
             <div class="footer-bottom">

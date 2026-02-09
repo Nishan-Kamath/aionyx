@@ -245,53 +245,219 @@
                 transform: translateX(-50%);
             }
         }
+
+        /* Vision & Mission Special Styling */
+        .vision-card {
+            background: rgba(17, 24, 39, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-xl);
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            backdrop-filter: blur(10px);
+            z-index: 1;
+        }
+
+        .vision-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(transparent, rgba(139, 92, 246, 0.3), transparent 30%);
+            animation: rotate 4s linear infinite;
+            z-index: -2;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .vision-card::after {
+            content: '';
+            position: absolute;
+            inset: 1px;
+            background: var(--surface);
+            border-radius: inherit;
+            z-index: -1;
+        }
+
+        .vision-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px -10px rgba(139, 92, 246, 0.2);
+            border-color: rgba(139, 92, 246, 0.5);
+        }
+
+        .vision-card:hover::before {
+            opacity: 1;
+        }
+
+        .vision-icon-wrapper {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(236, 72, 153, 0.1));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--primary);
+            margin: 0 auto 25px;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.1);
+            transition: all 0.5s ease;
+        }
+
+        .vision-card:hover .vision-icon-wrapper {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 0 0 30px rgba(139, 92, 246, 0.4);
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        @keyframes rotate {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
     </style>
 </head>
 
 <body class="dark-theme">
     <nav class="navbar">
-        <a href="index.html" class="logo">
+        <a href="/" class="logo">
             <i class="fas fa-code"></i>
             <span class="logo-text">AIONYX</span>
         </a>
         <div class="nav-links">
-            <a href="courses.html" class="nav-item">Courses</a>
-            <a href="about.html" class="nav-item">About Us</a>
-            <a href="contact.html" class="nav-item">Contact</a>
-            <a href="student-login.html" class="nav-btn btn-login">Login</a>
+            <a href="courses" class="nav-item">Courses</a>
+            <a href="about" class="nav-item">About Us</a>
+            <a href="contact" class="nav-item">Contact</a>
+            <a href="student-signup" class="nav-btn btn-login">Login</a>
         </div>
     </nav>
 
-    <header class="about-hero section-reveal active" style="position: relative; overflow: hidden;">
-        <div class="hero-slider">
-            <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=2070"
-                class="slider-img" alt="">
-            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=2070"
-                class="slider-img" alt="">
-            <img src="https://images.unsplash.com/photo-1587620962725-abab7fe55159?auto=format&fit=crop&q=80&w=2070"
-                class="slider-img" alt="">
-            <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=2070"
-                class="slider-img" alt="">
+    <header class="about-hero section-reveal active"
+        style="position: relative; overflow: hidden; min-height: 80vh; display: flex; align-items: center; justify-content: center; text-align: center;">
+
+        <!-- 1. Geometric/Network Background Image with Animation -->
+        <div class="hero-bg-animate"
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; background-image: url('https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070&auto=format&fit=crop'); background-size: cover; background-position: center;">
         </div>
-        <div class="container">
-            <h1 class="reveal-up active" style="font-size: 4rem; font-weight: 900; position: relative;">The Visionaries
-                Behind <span class="text-gradient">AIONYX</span></h1>
-            <p class="reveal-up active"
-                style="font-size: 1.25rem; color: var(--text-secondary); max-width: 700px; margin: 20px auto 0; position: relative;">
-                Empowering the next generation of engineers through elite-level DSA architecture and problem-solving
-                mastery.
+        <style>
+            @keyframes subtleZoom {
+                0% {
+                    transform: scale(1);
+                }
+
+                50% {
+                    transform: scale(1.1);
+                }
+
+                100% {
+                    transform: scale(1);
+                }
+            }
+
+            .hero-bg-animate {
+                animation: subtleZoom 20s ease-in-out infinite;
+            }
+        </style>
+
+        <!-- 2. Canvas Animation Overlay (Particles) -->
+        <canvas id="hero-canvas"
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.5;"></canvas>
+
+        <!-- 3. Gradient Overlay for Text Readability -->
+        <div class="overlay"
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at center, rgba(10, 10, 15, 0.4) 0%, var(--background) 100%); pointer-events: none; z-index: -1;">
+        </div>
+
+        <div class="container" style="position: relative; z-index: 1;">
+            <style>
+                /* Wordfall Animation */
+                .wordfall-wrapper {
+                    display: inline-block;
+                    overflow: hidden;
+                    vertical-align: bottom;
+                }
+
+                .wordfall {
+                    display: inline-block;
+                    transform: translateY(-100%);
+                    opacity: 0;
+                    animation: wordFall 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+                }
+
+                @keyframes wordFall {
+                    to {
+                        transform: translateY(0);
+                        opacity: 1;
+                    }
+                }
+            </style>
+            <h1 style="font-size: 4rem; font-weight: 900;">
+                <span class="wordfall-wrapper"><span class="wordfall" style="animation-delay: 0.1s;">The</span></span>
+                <span class="wordfall-wrapper"><span class="wordfall"
+                        style="animation-delay: 0.2s;">Trainers</span></span>
+                <span class="wordfall-wrapper"><span class="wordfall"
+                        style="animation-delay: 0.3s;">Behind</span></span>
+                <span class="wordfall-wrapper"><span class="wordfall text-gradient"
+                        style="animation-delay: 0.4s;">AIONYX</span></span>
+            </h1>
+            <p
+                style="font-size: 1.25rem; color: var(--text-secondary); max-width: 700px; margin: 20px auto 0; line-height: 1.6;">
+                <span class="wordfall-wrapper"><span class="wordfall" style="animation-delay: 0.5s;">We</span></span>
+                <span class="wordfall-wrapper"><span class="wordfall" style="animation-delay: 0.55s;">are</span></span>
+                <span class="wordfall-wrapper"><span class="wordfall"
+                        style="animation-delay: 0.6s;">passionate</span></span>
+                <span class="wordfall-wrapper"><span class="wordfall"
+                        style="animation-delay: 0.65s;">developers</span></span>
+                <span class="wordfall-wrapper"><span class="wordfall"
+                        style="animation-delay: 0.7s;">dedicated</span></span>
+                <span class="wordfall-wrapper"><span class="wordfall" style="animation-delay: 0.75s;">to</span></span>
+                <span class="wordfall-wrapper"><span class="wordfall" style="animation-delay: 0.8s;">your</span></span>
+                <span class="wordfall-wrapper"><span class="wordfall"
+                        style="animation-delay: 0.85s;">growth.</span></span>
+                <span class="wordfall-wrapper"><span class="wordfall" style="animation-delay: 0.9s;">We</span></span>
+                <span class="wordfall-wrapper"><span class="wordfall"
+                        style="animation-delay: 0.95s;">simplify</span></span>
+                <span class="wordfall-wrapper"><span class="wordfall" style="animation-delay: 1.0s;">Data</span></span>
+                <span class="wordfall-wrapper"><span class="wordfall"
+                        style="animation-delay: 1.05s;">Structures</span></span>
+                <span class="wordfall-wrapper"><span class="wordfall" style="animation-delay: 1.1s;">and</span></span>
+                <span class="wordfall-wrapper"><span class="wordfall"
+                        style="animation-delay: 1.15s;">Algorithms,</span></span>
+                <span class="wordfall-wrapper"><span class="wordfall"
+                        style="animation-delay: 1.2s;">transforming</span></span>
+                <span class="wordfall-wrapper"><span class="wordfall"
+                        style="animation-delay: 1.25s;">complex</span></span>
+                <span class="wordfall-wrapper"><span class="wordfall"
+                        style="animation-delay: 1.3s;">problems</span></span>
+                <span class="wordfall-wrapper"><span class="wordfall" style="animation-delay: 1.35s;">into</span></span>
+                <span class="wordfall-wrapper"><span class="wordfall"
+                        style="animation-delay: 1.4s;">clear,</span></span>
+                <span class="wordfall-wrapper"><span class="wordfall"
+                        style="animation-delay: 1.45s;">solvable</span></span>
+                <span class="wordfall-wrapper"><span class="wordfall"
+                        style="animation-delay: 1.5s;">patterns</span></span>
+                <span class="wordfall-wrapper"><span class="wordfall" style="animation-delay: 1.55s;">for</span></span>
+                <span class="wordfall-wrapper"><span class="wordfall" style="animation-delay: 1.6s;">your</span></span>
+                <span class="wordfall-wrapper"><span class="wordfall"
+                        style="animation-delay: 1.65s;">success.</span></span>
             </p>
         </div>
     </header>
 
     <section class="container section-reveal active">
         <div class="platform-intro">
-            <div class="platform-image reveal-left active">
+            <div class="platform-image reveal-left">
                 <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=2070"
                     alt="AIONYX Platform">
                 <!-- Fallback if user wants to add their own platform image -->
             </div>
-            <div class="platform-content reveal-right active">
+            <div class="platform-content reveal-right">
                 <h2 style="font-size: 2.5rem; margin-bottom: 25px;">Building the Future of <span
                         class="text-gradient">Technical Education</span></h2>
                 <p style="margin-bottom: 20px; color: var(--text-secondary); line-height: 1.8;">
@@ -306,18 +472,49 @@
         </div>
     </section>
 
+    <!-- Vision & Mission Section -->
+    <section class="container section-reveal active" style="padding-bottom: 80px;">
+        <div class="dev-grid"
+            style="margin-top: 0; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px;">
+            <!-- Vision -->
+            <div class="vision-card reveal-up active">
+                <div class="vision-icon-wrapper">
+                    <i class="fas fa-eye"></i>
+                </div>
+                <h3 class="dev-name" style="margin-bottom: 15px; font-size: 1.75rem;">Our Vision</h3>
+                <p class="dev-bio" style="font-size: 1.15rem; line-height: 1.7;">
+                    To democratize access to elite-level technical education, creating a world where every dedicated
+                    student has the roadmap and mentorship to crack top-tier engineering roles, regardless of their
+                    background.
+                </p>
+            </div>
+
+            <!-- Mission -->
+            <div class="vision-card reveal-up active" style="transition-delay: 0.1s;">
+                <div class="vision-icon-wrapper">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <h3 class="dev-name" style="margin-bottom: 15px; font-size: 1.75rem;">Our Mission</h3>
+                <p class="dev-bio" style="font-size: 1.15rem; line-height: 1.7;">
+                    We are on a mission to simplify complex algorithms into intuitive patterns. By bridging the gap
+                    between academic theory and industry application, we empower students to code with confidence and
+                    logic.
+                </p>
+            </div>
+        </div>
+    </section>
+
     <section class="container section-reveal active" style="padding-bottom: 100px;">
         <div class="text-center" style="margin-bottom: 60px;">
-            <span class="section-badge"
-                style="margin-bottom: 1.5rem; background: rgba(236, 72, 153, 0.1); border-color: rgba(236, 72, 153, 0.2); color: var(--secondary);">MEET
-                THE TEAM</span>
-            <h2 style="font-size: 3.5rem; font-weight: 800; margin-bottom: 1rem; line-height: 1.2;">The Minds Behind
+
+            <h2 style="font-size: 3.5rem; font-weight: 800; margin-bottom: 1rem; line-height: 1.2;">Meet the
                 <span class="text-gradient"
-                    style="background: linear-gradient(135deg, white, #a78bfa); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">Innovation</span>
+                    style="background: linear-gradient(135deg, white, #a78bfa); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">Developers</span>
             </h2>
             <p
                 style="font-size: 1.1rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto; line-height: 1.6;">
-                Passionate professionals dedicated to delivering excellence and driving your success.
+                Expert trainers and mentors dedicated to simplifying complex engineering concepts and accelerating your
+                technical mastery
             </p>
         </div>
 
@@ -335,14 +532,14 @@
                     </div>
                 </div>
                 <h3 class="dev-name">Supriya S Poojary</h3>
-                <span class="dev-role">Data Structures & Algorithms (DSA) Trainer</span>
-                <p class="dev-bio">Responsible for guiding students in Data Structures and Algorithms, explaining
-                    fundamental and intermediate concepts, and assisting in solving coding problems to improve
-                    analytical thinking, algorithmic reasoning, and structured problem-solving skills.</p>
+                <span class="dev-role">Full stack web developer</span>
+                <p class="dev-bio">Expert in architecting scalable full-stack solutions and delivering seamless,
+                    user-centric web experiences.</p>
                 <div class="skills-tag">
-                    <span class="skill">DSA Training</span>
-                    <span class="skill">Problem Solving</span>
-                    <span class="skill">Algorithmic Reasoning</span>
+                    <span class="skill">Full Stack Development</span>
+                    <span class="skill">Backend Development</span>
+                    <span class="skill">Web Architecture</span>
+                    <span class="skill">UI/UX Design</span>
                 </div>
             </div>
 
@@ -358,13 +555,13 @@
                     </div>
                 </div>
                 <h3 class="dev-name">Akanksha</h3>
-                <span class="dev-role">Data Structures & Algorithms (DSA) Trainer</span>
-                <p class="dev-bio">Focused on teaching core Data Structures and Algorithms concepts, helping students
-                    understand problem-solving strategies and apply logical thinking to coding challenges.</p>
+                <span class="dev-role">Full stack web developer</span>
+                <p class="dev-bio">Dedicated to building high-performance web applications with a focus on robust
+                    backend systems and modern technologies.</p>
                 <div class="skills-tag">
-                    <span class="skill">DSA Training</span>
-                    <span class="skill">Problem Solving</span>
-                    <span class="skill">Logical Thinking</span>
+                    <span class="skill">Backend Systems</span>
+                    <span class="skill">Frontend Frameworks</span>
+                    <span class="skill">System Design</span>
                 </div>
             </div>
 
@@ -380,13 +577,13 @@
                     </div>
                 </div>
                 <h3 class="dev-name">Shrushti</h3>
-                <span class="dev-role">Programming Trainer</span>
-                <p class="dev-bio">Supports students in learning programming fundamentals by explaining concepts
-                    clearly, assisting with practice problems, and encouraging logical and structured thinking.</p>
+                <span class="dev-role">Frontend developer</span>
+                <p class="dev-bio">Passionate about crafting intuitive user interfaces and bringing designs to life with
+                    clean, efficient code.</p>
                 <div class="skills-tag">
-                    <span class="skill">Programming Fundamentals</span>
-                    <span class="skill">Practice Problems</span>
-                    <span class="skill">Logical Thinking</span>
+                    <span class="skill">UI Architecture</span>
+                    <span class="skill">Modern CSS</span>
+                    <span class="skill">Responsive Design</span>
                 </div>
             </div>
 
@@ -403,13 +600,13 @@
                     </div>
                 </div>
                 <h3 class="dev-name">Akhila</h3>
-                <span class="dev-role">Technical Trainer</span>
-                <p class="dev-bio">Involved in guiding students through basic technical concepts, helping them build
-                    strong foundations in coding, logic development, and problem-solving skills.</p>
+                <span class="dev-role">Frontend developer</span>
+                <p class="dev-bio">Specializes in building responsive and accessible web components that provide a
+                    seamless user experience across all devices.</p>
                 <div class="skills-tag">
-                    <span class="skill">Technical Concepts</span>
-                    <span class="skill">Logic Development</span>
-                    <span class="skill">Problem Solving</span>
+                    <span class="skill">Frontend Engineering</span>
+                    <span class="skill">User Experience</span>
+                    <span class="skill">Web Performance</span>
                 </div>
             </div>
         </div>
@@ -544,85 +741,115 @@
         .faq-container {
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 1rem;
         }
 
         .faq-item {
-            background: var(--surface);
-            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
             border-radius: var(--radius-lg);
             overflow: hidden;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .faq-item:hover {
+            background: rgba(139, 92, 246, 0.15);
+            /* Purple tint */
             border-color: var(--primary);
-            box-shadow: var(--shadow-md);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 20px rgba(139, 92, 246, 0.2);
+            /* Glow effect */
+        }
+
+        .faq-item.active {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(236, 72, 153, 0.05));
+            border-color: rgba(139, 92, 246, 0.5);
+            box-shadow: 0 10px 30px -5px rgba(139, 92, 246, 0.2), 0 0 15px rgba(139, 92, 246, 0.1) inset;
+            transform: scale(1.02);
         }
 
         .faq-question {
-            padding: 2rem;
+            padding: 1.25rem 1.75rem;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 2rem;
+            gap: 1.5rem;
             transition: all 0.3s ease;
             user-select: none;
         }
 
-        .faq-question:hover {
-            background: var(--surface-hover);
-        }
-
         .faq-question h3 {
-            font-size: 1.25rem;
-            font-weight: 600;
+            font-size: 1.1rem;
+            font-weight: 500;
             color: var(--text-primary);
             margin: 0;
             flex: 1;
+            letter-spacing: 0.01em;
         }
 
         .faq-icon {
-            font-size: 1.25rem;
+            font-size: 1rem;
+            color: var(--text-secondary);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0.7;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .faq-item:hover .faq-icon {
             color: var(--primary);
-            transition: transform 0.3s ease;
-            flex-shrink: 0;
+            background: rgba(139, 92, 246, 0.1);
+            opacity: 1;
         }
 
         .faq-item.active .faq-icon {
             transform: rotate(45deg);
+            color: var(--primary);
+            background: rgba(139, 92, 246, 0.1);
+            opacity: 1;
         }
 
         .faq-answer {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.4s ease, padding 0.4s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 0 1.75rem;
+            opacity: 0;
         }
 
         .faq-item.active .faq-answer {
-            max-height: 500px;
-            padding: 0 2rem 2rem 2rem;
+            max-height: 300px;
+            /* Restrict max height */
+            padding: 0 1.75rem 1.5rem 1.75rem;
+            opacity: 1;
         }
 
         .faq-answer p {
             color: var(--text-secondary);
-            line-height: 1.8;
-            font-size: 1.05rem;
+            line-height: 1.7;
+            font-size: 0.95rem;
             margin: 0;
+            padding-top: 0.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         @media (max-width: 768px) {
             .faq-question {
-                padding: 1.5rem;
+                padding: 1rem 1.25rem;
             }
 
             .faq-question h3 {
-                font-size: 1.1rem;
+                font-size: 1rem;
             }
 
             .faq-item.active .faq-answer {
-                padding: 0 1.5rem 1.5rem 1.5rem;
+                padding: 0 1.25rem 1.25rem 1.25rem;
             }
         }
     </style>
@@ -646,17 +873,60 @@
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="container" style="text-align: center;">
-            <div style="margin-bottom: 30px;">
-                <h3><i class="fas fa-code"></i> AIONYX</h3>
-                <p style="color: var(--text-secondary); max-width: 600px; margin: 15px auto;">
-                    Empowering developers to master coding interviews with AI-powered learning and expert guidance.
-                </p>
-                <div class="footer-social" style="display: flex; gap: 15px; justify-content: center; margin-top: 20px;">
-                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-github"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+        <div class="container">
+            <div class="footer-content">
+                <!-- Brand -->
+                <div class="footer-brand">
+                    <a href="/" class="logo">
+                        <i class="fas fa-code"></i>
+                        <span class="logo-text">AIONYX</span>
+                    </a>
+                    <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 2rem; margin-top: 1rem;">
+                        Empowering developers to master coding interviews with AI-powered learning and expert guidance.
+                    </p>
+                    <div class="footer-social">
+                        <a href="https://www.linkedin.com/company/algoorbit/" target="_blank" class="social-link"><i
+                                class="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.instagram.com/algoorbit_official/" target="_blank" class="social-link"><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="https://www.facebook.com/people/Aionyx-AI/pfbid026ZtArzFeEPxSGu9tgG6QXsxkiYUmw4LMGqCgV87sP3ufxCVPPv7BFCoxc5jF7JvMl/"
+                            target="_blank" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.whatsapp.com/channel/0029VbBktvfAYlUS6kToth1B" target="_blank"
+                            class="social-link"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <!-- Platform -->
+                <div class="footer-section">
+                    <h4>Platform</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Problems</a></li>
+                        <li><a href="#">Resources</a></li>
+                    </ul>
+                </div>
+
+                <!-- Company -->
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="about">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="contact">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Legal -->
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">GDPR</a></li>
+                    </ul>
                 </div>
             </div>
             <div class="footer-bottom">
@@ -666,6 +936,7 @@
     </footer>
 
     <script src="js/theme.js"></script>
+    <script src="js/hero-animation.js"></script>
 </body>
 
 </html>

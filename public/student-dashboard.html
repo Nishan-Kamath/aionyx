@@ -945,7 +945,7 @@
 <body>
     <!-- Navigation -->
     <nav class="navbar">
-        <a href="index.html" class="logo">
+        <a href="/" class="logo">
             <i class="fas fa-code"></i>
             <span class="logo-text">AIONYX</span>
         </a>
@@ -1184,7 +1184,7 @@
         const user = JSON.parse(localStorage.getItem('user') || '{}');
 
         if (!token) {
-            window.location.href = 'student-login.html';
+            window.location.href = 'student-login';
         }
 
         // Update user info
@@ -1544,7 +1544,7 @@
         // Logout
         document.getElementById('logoutBtn').addEventListener('click', () => {
             localStorage.clear();
-            window.location.href = 'student-login.html';
+            window.location.href = 'student-login';
         });
 
         // Start app

@@ -220,9 +220,9 @@
             </div>
 
             <div class="login-footer">
-                <p>Not an administrator? <a href="student-login.html">Student Login</a></p>
+                <p>Not an administrator? <a href="student-login">Student Login</a></p>
                 <div style="margin-top: 1rem;">
-                    <a href="index.html" style="color: var(--text-muted); font-size: 0.85rem;">
+                    <a href="/" style="color: var(--text-muted); font-size: 0.85rem;">
                         <i class="fas fa-arrow-left"></i> Return to Main Terminal
                     </a>
                 </div>
@@ -271,7 +271,7 @@
                     document.body.style.transition = 'opacity 0.3s';
 
                     setTimeout(() => {
-                        window.location.replace('admin-dashboard.html');
+                        window.location.replace('admin-dashboard');
                     }, 300);
                 } else {
                     errorMessage.textContent = data.message || 'Verification Error';

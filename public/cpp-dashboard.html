@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn C++ Programming - AIONYX</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="css/theme.css">
+
+    <style>
+        body {
+            padding-top: 80px;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding-top: 70px;
+            }
+        }
+
+        .dashboard-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 2rem;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @media (max-width: 1024px) {
+            .dashboard-container {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+                gap: 1.5rem;
+            }
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+            animation: slideInLeft 0.8s ease-out;
+        }
+
+        @media (max-width: 1024px) {
+            .sidebar {
+                position: static;
+            }
+        }
+
+        .profile-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+        }
+
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            margin: 0 auto 1rem;
+            box-shadow: var(--glow-primary);
+        }
+
+        .profile-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-email {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .progress-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .progress-header {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .progress-header i {
+            color: var(--primary);
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: var(--background);
+            border-radius: var(--radius-md);
+            margin-bottom: 1rem;
+            transition: all var(--transition-base);
+        }
+
+        .stat-item:hover {
+            transform: translateX(5px);
+            background: var(--surface-hover);
+        }
+
+        .stat-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .stat-value {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .total-completed {
+            text-align: center;
+            padding: 2rem 1rem;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(236, 72, 153, 0.1));
+            border-radius: var(--radius-md);
+            margin-top: 1.5rem;
+        }
+
+        .total-number {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .total-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Main Content */
+        .main-content {
+            animation: slideInRight 0.8s ease-out;
+        }
+
+        .welcome-banner {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .welcome-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="2" fill="white" opacity="0.1"/></svg>');
+            opacity: 0.3;
+        }
+
+        .welcome-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .welcome-banner h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .welcome-banner p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .curriculum-section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-title i {
+            color: var(--primary);
+        }
+
+        /* Module Groups */
+        .module-group {
+            margin-bottom: 2.5rem;
+        }
+
+        .module-header {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--border);
+            cursor: pointer;
+            transition: all var(--transition-base);
+        }
+
+        .module-header:hover {
+            color: var(--secondary);
+        }
+
+        .module-header i {
+            transition: transform var(--transition-base);
+        }
+
+        .module-group.expanded .module-header i {
+            transform: rotate(90deg);
+        }
+
+        .lessons-container {
+            display: none;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .module-group.expanded .lessons-container {
+            display: grid;
+        }
+
+        .lesson-card {
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            transition: all var(--transition-base);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .lesson-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-md);
+        }
+
+        .lesson-card.completed {
+            border-color: var(--success);
+            background: linear-gradient(to bottom right, var(--background), rgba(34, 197, 94, 0.05));
+        }
+
+        .lesson-status {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .lesson-card.completed .lesson-status {
+            background: var(--success);
+            border-color: var(--success);
+            color: white;
+        }
+
+        .lesson-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+            padding-right: 2rem;
+        }
+
+        .lesson-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .lesson-meta {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .lesson-meta i {
+            color: var(--primary);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="/" class="logo">
+            <i class="fas fa-code"></i>
+            <span class="logo-text">AIONYX</span>
+        </a>
+        <div class="nav-links">
+            <a href="student-courses" class="btn btn-ghost">
+                <i class="fas fa-arrow-left"></i> Back to Courses
+            </a>
+            <span id="userName" style="color: var(--text-muted); font-weight: 600;">Student</span>
+            <button id="logoutBtn" class="btn btn-ghost">
+                Logout
+            </button>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="profile-card">
+                <div class="profile-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <h2 class="profile-name" id="profileName">Student</h2>
+                <p class="profile-email" id="profileEmail">student@example.com</p>
+            </div>
+
+            <div class="progress-card">
+                <div class="progress-header">
+                    <i class="fas fa-chart-line"></i>
+                    Course Progress
+                </div>
+
+                <div class="stat-item">
+                    <div class="stat-label">
+                        <i class="fas fa-book"></i>
+                        <span>Modules</span>
+                    </div>
+                    <div class="stat-value">0/10</div>
+                </div>
+
+                <div class="stat-item">
+                    <div class="stat-label">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Lessons</span>
+                    </div>
+                    <div class="stat-value">0/45</div>
+                </div>
+
+                <div class="total-completed">
+                    <span class="total-number">0%</span>
+                    <span class="total-label">Completed</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="welcome-banner">
+                <div class="welcome-content">
+                    <h1>Learn C++ Programming</h1>
+                    <p>Master C++ from basics to advanced concepts with hands-on practice</p>
+                </div>
+            </div>
+
+            <div class="curriculum-section">
+                <div class="section-header">
+                    <div class="section-title">
+                        <i class="fas fa-graduation-cap"></i>
+                        Course Curriculum
+                    </div>
+                </div>
+
+                <!-- Module 1: Getting Started -->
+                <div class="module-group expanded">
+                    <div class="module-header">
+                        <i class="fas fa-chevron-right"></i>
+                        <span>1. Getting Started with C++</span>
+                    </div>
+                    <div class="lessons-container">
+                        <div class="lesson-card">
+                            <div class="lesson-status"></div>
+                            <h3 class="lesson-title">Introduction to C++</h3>
+                            <p class="lesson-description">Learn about C++ history, features, and why it's important</p>
+                            <div class="lesson-meta">
+                                <span><i class="fas fa-clock"></i> 15 min</span>
+                                <span><i class="fas fa-signal"></i> Beginner</span>
+                            </div>
+                        </div>
+                        <div class="lesson-card">
+                            <div class="lesson-status"></div>
+                            <h3 class="lesson-title">Setting Up Environment</h3>
+                            <p class="lesson-description">Install compiler and IDE for C++ development</p>
+                            <div class="lesson-meta">
+                                <span><i class="fas fa-clock"></i> 20 min</span>
+                                <span><i class="fas fa-signal"></i> Beginner</span>
+                            </div>
+                        </div>
+                        <div class="lesson-card">
+                            <div class="lesson-status"></div>
+                            <h3 class="lesson-title">Your First C++ Program</h3>
+                            <p class="lesson-description">Write and run your first "Hello World" program</p>
+                            <div class="lesson-meta">
+                                <span><i class="fas fa-clock"></i> 25 min</span>
+                                <span><i class="fas fa-signal"></i> Beginner</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Module 2: Variables & Data Types -->
+                <div class="module-group">
+                    <div class="module-header">
+                        <i class="fas fa-chevron-right"></i>
+                        <span>2. Variables & Data Types</span>
+                    </div>
+                    <div class="lessons-container">
+                        <div class="lesson-card">
+                            <div class="lesson-status"></div>
+                            <h3 class="lesson-title">Primitive Data Types</h3>
+                            <p class="lesson-description">int, float, double, char, bool and their usage</p>
+                            <div class="lesson-meta">
+                                <span><i class="fas fa-clock"></i> 30 min</span>
+                                <span><i class="fas fa-signal"></i> Beginner</span>
+                            </div>
+                        </div>
+                        <div class="lesson-card">
+                            <div class="lesson-status"></div>
+                            <h3 class="lesson-title">Variables & Constants</h3>
+                            <p class="lesson-description">Declaring variables, constants, and naming conventions</p>
+                            <div class="lesson-meta">
+                                <span><i class="fas fa-clock"></i> 25 min</span>
+                                <span><i class="fas fa-signal"></i> Beginner</span>
+                            </div>
+                        </div>
+                        <div class="lesson-card">
+                            <div class="lesson-status"></div>
+                            <h3 class="lesson-title">Type Conversion</h3>
+                            <p class="lesson-description">Implicit and explicit type casting in C++</p>
+                            <div class="lesson-meta">
+                                <span><i class="fas fa-clock"></i> 20 min</span>
+                                <span><i class="fas fa-signal"></i> Beginner</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Module 3: Operators -->
+                <div class="module-group">
+                    <div class="module-header">
+                        <i class="fas fa-chevron-right"></i>
+                        <span>3. Operators & Expressions</span>
+                    </div>
+                    <div class="lessons-container">
+                        <div class="lesson-card">
+                            <div class="lesson-status"></div>
+                            <h3 class="lesson-title">Arithmetic Operators</h3>
+                            <p class="lesson-description">+, -, *, /, % and their applications</p>
+                            <div class="lesson-meta">
+                                <span><i class="fas fa-clock"></i> 20 min</span>
+                                <span><i class="fas fa-signal"></i> Beginner</span>
+                            </div>
+                        </div>
+                        <div class="lesson-card">
+                            <div class="lesson-status"></div>
+                            <h3 class="lesson-title">Logical & Relational</h3>
+                            <p class="lesson-description">Comparison and logical operators</p>
+                            <div class="lesson-meta">
+                                <span><i class="fas fa-clock"></i> 25 min</span>
+                                <span><i class="fas fa-signal"></i> Beginner</span>
+                            </div>
+                        </div>
+                        <div class="lesson-card">
+                            <div class="lesson-status"></div>
+                            <h3 class="lesson-title">Bitwise Operators</h3>
+                            <p class="lesson-description">Bit manipulation and bitwise operations</p>
+                            <div class="lesson-meta">
+                                <span><i class="fas fa-clock"></i> 30 min</span>
+                                <span><i class="fas fa-signal"></i> Intermediate</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Module 4: Control Flow -->
+                <div class="module-group">
+                    <div class="module-header">
+                        <i class="fas fa-chevron-right"></i>
+                        <span>4. Control Flow Statements</span>
+                    </div>
+                    <div class="lessons-container">
+                        <div class="lesson-card">
+                            <div class="lesson-status"></div>
+                            <h3 class="lesson-title">If-Else Statements</h3>
+                            <p class="lesson-description">Conditional execution and decision making</p>
+                            <div class="lesson-meta">
+                                <span><i class="fas fa-clock"></i> 30 min</span>
+                                <span><i class="fas fa-signal"></i> Beginner</span>
+                            </div>
+                        </div>
+                        <div class="lesson-card">
+                            <div class="lesson-status"></div>
+                            <h3 class="lesson-title">Switch Statements</h3>
+                            <p class="lesson-description">Multi-way branching with switch-case</p>
+                            <div class="lesson-meta">
+                                <span><i class="fas fa-clock"></i> 25 min</span>
+                                <span><i class="fas fa-signal"></i> Beginner</span>
+                            </div>
+                        </div>
+                        <div class="lesson-card">
+                            <div class="lesson-status"></div>
+                            <h3 class="lesson-title">Loops</h3>
+                            <p class="lesson-description">for, while, do-while loops and iteration</p>
+                            <div class="lesson-meta">
+                                <span><i class="fas fa-clock"></i> 35 min</span>
+                                <span><i class="fas fa-signal"></i> Beginner</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Module 5: Functions -->
+                <div class="module-group">
+                    <div class="module-header">
+                        <i class="fas fa-chevron-right"></i>
+                        <span>5. Functions</span>
+                    </div>
+                    <div class="lessons-container">
+                        <div class="lesson-card">
+                            <div class="lesson-status"></div>
+                            <h3 class="lesson-title">Function Basics</h3>
+                            <p class="lesson-description">Defining and calling functions</p>
+                            <div class="lesson-meta">
+                                <span><i class="fas fa-clock"></i> 30 min</span>
+                                <span><i class="fas fa-signal"></i> Beginner</span>
+                            </div>
+                        </div>
+                        <div class="lesson-card">
+                            <div class="lesson-status"></div>
+                            <h3 class="lesson-title">Parameters & Return Values</h3>
+                            <p class="lesson-description">Pass by value, reference, and return types</p>
+                            <div class="lesson-meta">
+                                <span><i class="fas fa-clock"></i> 35 min</span>
+                                <span><i class="fas fa-signal"></i> Intermediate</span>
+                            </div>
+                        </div>
+                        <div class="lesson-card">
+                            <div class="lesson-status"></div>
+                            <h3 class="lesson-title">Function Overloading</h3>
+                            <p class="lesson-description">Multiple functions with same name</p>
+                            <div class="lesson-meta">
+                                <span><i class="fas fa-clock"></i> 25 min</span>
+                                <span><i class="fas fa-signal"></i> Intermediate</span>
+                            </div>
+                        </div>
+                        <div class="lesson-card">
+                            <div class="lesson-status"></div>
+                            <h3 class="lesson-title">Recursion</h3>
+                            <p class="lesson-description">Functions calling themselves</p>
+                            <div class="lesson-meta">
+                                <span><i class="fas fa-clock"></i> 40 min</span>
+                                <span><i class="fas fa-signal"></i> Intermediate</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Module 6: Arrays & Strings -->
+                <div class="module-group">
+                    <div class="module-header">
+                        <i class="fas fa-chevron-right"></i>
+                        <span>6. Arrays & Strings</span>
+                    </div>
+                    <div class="lessons-container">
+                        <div class="lesson-card">
+                            <div class="lesson-status"></div>
+                            <h3 class="lesson-title">Array Fundamentals</h3>
+                            <p class="lesson-description">Declaring, initializing, and accessing arrays</p>
+                            <div class="lesson-meta">
+                                <span><i class="fas fa-clock"></i> 30 min</span>
+                                <span><i class="fas fa-signal"></i> Beginner</span>
+                            </div>
+                        </div>
+                        <div class="lesson-card">
+                            <div class="lesson-status"></div>
+                            <h3 class="lesson-title">Multi-dimensional Arrays</h3>
+                            <p class="lesson-description">2D arrays and matrices</p>
+                            <div class="lesson-meta">
+                                <span><i class="fas fa-clock"></i> 35 min</span>
+                                <span><i class="fas fa-signal"></i> Intermediate</span>
+                            </div>
+                        </div>
+                        <div class="lesson-card">
+                            <div class="lesson-status"></div>
+                            <h3 class="lesson-title">C-Style Strings</h3>
+                            <p class="lesson-description">Character arrays and string functions</p>
+                            <div class="lesson-meta">
+                                <span><i class="fas fa-clock"></i> 30 min</span>
+                                <span><i class="fas fa-signal"></i> Intermediate</span>
+                            </div>
+                        </div>
+                        <div class="lesson-card">
+                            <div class="lesson-status"></div>
+                            <h3 class="lesson-title">String Class</h3>
+                            <p class="lesson-description">std::string and string operations</p>
+                            <div class="lesson-meta">
+                                <span><i class="fas fa-clock"></i> 35 min</span>
+                                <span><i class="fas fa-signal"></i> Intermediate</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Module 7: Pointers & References -->
+                <div class="module-group">
+                    <div class="module-header">
+                        <i class="fas fa-chevron-right"></i>
+                        <span>7. Pointers & References</span>
+                    </div>
+                    <div class="lessons-container">
+                        <div class="lesson-card">
+                            <div class="lesson-status"></div>
+                            <h3 class="lesson-title">Pointer Basics</h3>
+                            <p class="lesson-description">Understanding memory addresses and pointers</p>
+                            <div class="lesson-meta">
+                                <span><i class="fas fa-clock"></i> 40 min</span>
+                                <span><i class="fas fa-signal"></i> Intermediate</span>
+                            </div>
+                        </div>
+                        <div class="lesson-card">
+                            <div class="lesson-status"></div>
+                            <h3 class="lesson-title">Pointer Arithmetic</h3>
+                            <p class="lesson-description">Operations on pointers</p>
+                            <div class="lesson-meta">
+                                <span><i class="fas fa-clock"></i> 35 min</span>
+                                <span><i class="fas fa-signal"></i> Intermediate</span>
+                            </div>
+                        </div>
+                        <div class="lesson-card">
+                            <div class="lesson-status"></div>
+                            <h3 class="lesson-title">References</h3>
+                            <p class="lesson-description">Reference variables and their uses</p>
+                            <div class="lesson-meta">
+                                <span><i class="fas fa-clock"></i> 30 min</span>
+                                <span><i class="fas fa-signal"></i> Intermediate</span>
+                            </div>
+                        </div>
+                        <div class="lesson-card">
+                            <div class="lesson-status"></div>
+                            <h3 class="lesson-title">Dynamic Memory</h3>
+                            <p class="lesson-description">new, delete, and memory management</p>
+                            <div class="lesson-meta">
+                                <span><i class="fas fa-clock"></i> 45 min</span>
+                                <span><i class="fas fa-signal"></i> Advanced</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Module 8: OOP -->
+                <div class="module-group">
+                    <div class="module-header">
+                        <i class="fas fa-chevron-right"></i>
+                        <span>8. Object-Oriented Programming</span>
+                    </div>
+                    <div class="lessons-container">
+                        <div class="lesson-card">
+                            <div class="lesson-status"></div>
+                            <h3 class="lesson-title">Classes & Objects</h3>
+                            <p class="lesson-description">Creating classes and instantiating objects</p>
+                            <div class="lesson-meta">
+                                <span><i class="fas fa-clock"></i> 40 min</span>
+                                <span><i class="fas fa-signal"></i> Intermediate</span>
+                            </div>
+                        </div>
+                        <div class="lesson-card">
+                            <div class="lesson-status"></div>
+                            <h3 class="lesson-title">Constructors & Destructors</h3>
+                            <p class="lesson-description">Object initialization and cleanup</p>
+                            <div class="lesson-meta">
+                                <span><i class="fas fa-clock"></i> 35 min</span>
+                                <span><i class="fas fa-signal"></i> Intermediate</span>
+                            </div>
+                        </div>
+                        <div class="lesson-card">
+                            <div class="lesson-status"></div>
+                            <h3 class="lesson-title">Inheritance</h3>
+                            <p class="lesson-description">Base and derived classes</p>
+                            <div class="lesson-meta">
+                                <span><i class="fas fa-clock"></i> 45 min</span>
+                                <span><i class="fas fa-signal"></i> Advanced</span>
+                            </div>
+                        </div>
+                        <div class="lesson-card">
+                            <div class="lesson-status"></div>
+                            <h3 class="lesson-title">Polymorphism</h3>
+                            <p class="lesson-description">Virtual functions and runtime polymorphism</p>
+                            <div class="lesson-meta">
+                                <span><i class="fas fa-clock"></i> 50 min</span>
+                                <span><i class="fas fa-signal"></i> Advanced</span>
+                            </div>
+                        </div>
+                        <div class="lesson-card">
+                            <div class="lesson-status"></div>
+                            <h3 class="lesson-title">Encapsulation & Abstraction</h3>
+                            <p class="lesson-description">Access specifiers and abstract classes</p>
+                            <div class="lesson-meta">
+                                <span><i class="fas fa-clock"></i> 40 min</span>
+                                <span><i class="fas fa-signal"></i> Advanced</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Module 9: STL -->
+                <div class="module-group">
+                    <div class="module-header">
+                        <i class="fas fa-chevron-right"></i>
+                        <span>9. Standard Template Library (STL)</span>
+                    </div>
+                    <div class="lessons-container">
+                        <div class="lesson-card">
+                            <div class="lesson-status"></div>
+                            <h3 class="lesson-title">Vectors</h3>
+                            <p class="lesson-description">Dynamic arrays with std::vector</p>
+                            <div class="lesson-meta">
+                                <span><i class="fas fa-clock"></i> 35 min</span>
+                                <span><i class="fas fa-signal"></i> Intermediate</span>
+                            </div>
+                        </div>
+                        <div class="lesson-card">
+                            <div class="lesson-status"></div>
+                            <h3 class="lesson-title">Maps & Sets</h3>
+                            <p class="lesson-description">Key-value pairs and unique elements</p>
+                            <div class="lesson-meta">
+                                <span><i class="fas fa-clock"></i> 40 min</span>
+                                <span><i class="fas fa-signal"></i> Intermediate</span>
+                            </div>
+                        </div>
+                        <div class="lesson-card">
+                            <div class="lesson-status"></div>
+                            <h3 class="lesson-title">Iterators</h3>
+                            <p class="lesson-description">Traversing containers efficiently</p>
+                            <div class="lesson-meta">
+                                <span><i class="fas fa-clock"></i> 30 min</span>
+                                <span><i class="fas fa-signal"></i> Intermediate</span>
+                            </div>
+                        </div>
+                        <div class="lesson-card">
+                            <div class="lesson-status"></div>
+                            <h3 class="lesson-title">Algorithms</h3>
+                            <p class="lesson-description">sort, find, binary_search and more</p>
+                            <div class="lesson-meta">
+                                <span><i class="fas fa-clock"></i> 45 min</span>
+                                <span><i class="fas fa-signal"></i> Advanced</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Module 10: Advanced Topics -->
+                <div class="module-group">
+                    <div class="module-header">
+                        <i class="fas fa-chevron-right"></i>
+                        <span>10. Advanced C++ Topics</span>
+                    </div>
+                    <div class="lessons-container">
+                        <div class="lesson-card">
+                            <div class="lesson-status"></div>
+                            <h3 class="lesson-title">Templates</h3>
+                            <p class="lesson-description">Generic programming with templates</p>
+                            <div class="lesson-meta">
+                                <span><i class="fas fa-clock"></i> 50 min</span>
+                                <span><i class="fas fa-signal"></i> Advanced</span>
+                            </div>
+                        </div>
+                        <div class="lesson-card">
+                            <div class="lesson-status"></div>
+                            <h3 class="lesson-title">Exception Handling</h3>
+                            <p class="lesson-description">try, catch, throw for error handling</p>
+                            <div class="lesson-meta">
+                                <span><i class="fas fa-clock"></i> 40 min</span>
+                                <span><i class="fas fa-signal"></i> Advanced</span>
+                            </div>
+                        </div>
+                        <div class="lesson-card">
+                            <div class="lesson-status"></div>
+                            <h3 class="lesson-title">File I/O</h3>
+                            <p class="lesson-description">Reading and writing files</p>
+                            <div class="lesson-meta">
+                                <span><i class="fas fa-clock"></i> 35 min</span>
+                                <span><i class="fas fa-signal"></i> Advanced</span>
+                            </div>
+                        </div>
+                        <div class="lesson-card">
+                            <div class="lesson-status"></div>
+                            <h3 class="lesson-title">Modern C++ Features</h3>
+                            <p class="lesson-description">C++11/14/17 features and best practices</p>
+                            <div class="lesson-meta">
+                                <span><i class="fas fa-clock"></i> 60 min</span>
+                                <span><i class="fas fa-signal"></i> Advanced</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Theme Manager -->
+    <script src="js/theme.js"></script>
+
+    <script>
+        // Auth Check
+        const token = localStorage.getItem('token');
+        const user = JSON.parse(localStorage.getItem('user') || '{}');
+
+        if (!token) {
+            window.location.href = 'student-login';
+        }
+
+        // Update user info
+        if (user.name) {
+            document.getElementById('userName').textContent = user.name;
+            document.getElementById('profileName').textContent = user.name;
+            if (user.email) {
+                document.getElementById('profileEmail').textContent = user.email;
+            }
+        }
+
+        // Logout
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            localStorage.clear();
+            window.location.href = 'student-login';
+        });
+
+        // Module Expand/Collapse
+        document.querySelectorAll('.module-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const moduleGroup = header.parentElement;
+                moduleGroup.classList.toggle('expanded');
+            });
+        });
+
+        // Lesson Click Handler
+        document.querySelectorAll('.lesson-card').forEach(card => {
+            card.addEventListener('click', () => {
+                alert('Lesson content coming soon! This will open the lesson viewer with code examples, explanations, and practice exercises.');
+            });
+        });
+    </script>
+</body>
+
+</html>

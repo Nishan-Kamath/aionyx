@@ -166,11 +166,11 @@ class ThemeManager {
         const text = this.toggleButton.querySelector('.theme-toggle-text');
 
         if (this.currentTheme === 'light') {
-            icon.className = 'theme-toggle-icon fas fa-sun';
-            text.textContent = 'Light Mode';
-        } else {
             icon.className = 'theme-toggle-icon fas fa-moon';
             text.textContent = 'Dark Mode';
+        } else {
+            icon.className = 'theme-toggle-icon fas fa-sun';
+            text.textContent = 'Light Mode';
         }
     }
 
